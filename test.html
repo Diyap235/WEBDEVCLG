@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Management System</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS Variables for Easy Color Management */
+        :root {
+            --primary-purple: #43348d;
+            --primary-blue: #007BFF;
+            --dark-blue: #0056b3;
+            --light-purple: #5a4fcf;
+            --white: #ffffff;
+            --white-transparent: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-purple) 50%, var(--primary-blue) 100%);
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            background: var(--white-transparent);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+        }
+
+        /* Header */
+        header h1 {
+            text-align: center;
+            color: var(--white);
+            background: linear-gradient(45deg, var(--primary-blue), var(--primary-purple));
+            padding: 30px;
+            font-size: 3em;
+            font-weight: 700;
+            border-radius: 15px;
+            margin: 0 0 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: slideInDown 1s ease-out;
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Navigation */
+        .nav-title {
+            text-align: center;
+            font-size: 1.8em;
+            color: var(--white);
+            margin-bottom: 30px;
+            font-weight: 600;
+            animation: fadeIn 1s ease-out 0.3s both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Hero Content */
+        .hero-content {
+            text-align: center;
+            padding: 30px 20px;
+            background: var(--white-transparent);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-content p {
+            color: var(--white);
+            font-size: 1.1em;
+            margin: 15px 0;
+            line-height: 1.6;
+        }
+
+        .main-description {
+            font-size: 1.3em !important;
+            font-weight: 600 !important;
+            color: rgba(255, 255, 255, 0.95) !important;
+        }
+
+        .motivation {
+            font-weight: 600 !important;
+            color: rgba(255, 255, 255, 0.95) !important;
+            margin-top: 25px !important;
+        }
+
+        /* Enhanced Navigation Links */
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.7s both;
+        }
+
+        .nav-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: white;
+            background: var(--white-transparent);
+            backdrop-filter: blur(10px);
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-link:hover::before {
+            left: 100%;
+        }
+
+        .nav-link:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--primary-blue);
+            box-shadow: 0 10px 25px rgba(0, 123, 255, 0.2);
+        }
+
+        .nav-link i {
+            font-size: 1.2em;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-link:hover i {
+            transform: scale(1.1);
+        }
+
+        /* Primary Button Style */
+        .primary-btn {
+            background: linear-gradient(45deg, var(--primary-blue), var(--primary-purple)) !important;
+            border-color: var(--primary-purple) !important;
+            box-shadow: 0 8px 25px rgba(67, 52, 141, 0.3) !important;
+        }
+
+        .primary-btn:hover {
+            background: linear-gradient(45deg, var(--primary-purple), var(--primary-blue)) !important;
+            box-shadow: 0 12px 35px rgba(0, 123, 255, 0.4) !important;
+            border-color: var(--primary-blue) !important;
+        }
+
+        /* Features Section */
+        .features-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 50px 0;
+            animation: fadeInUp 1s ease-out 0.9s both;
+        }
+
+        .feature-item {
+            background: var(--white-transparent);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-item i {
+            font-size: 2.5em;
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover i {
+            color: var(--primary-purple);
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .feature-item h3 {
+            color: var(--white);
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .feature-item p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+
+        /* Additional Links */
+        .additional-links {
+            text-align: center;
+            margin: 40px 0;
+            padding: 25px;
+            background: var(--white-transparent);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: fadeInUp 1s ease-out 1.1s both;
+        }
+
+        .additional-links p {
+            color: var(--white);
+            font-size: 1.1em;
+            margin: 15px 0;
+            line-height: 1.6;
+        }
+
+        .inline-link {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .inline-link:hover {
+            background: rgba(0, 123, 255, 0.2);
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        footer p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1em;
+            margin: 10px 0;
+        }
+
+        .footer-links {
+            margin-top: 15px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-blue);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.2em;
+                padding: 20px;
+            }
+            
+            .nav-title {
+                font-size: 1.4em;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .nav-link {
+                width: 250px;
+                justify-content: center;
+            }
+
+            .features-section {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
+
+            header h1 {
+                font-size: 1.8em;
+                padding: 15px;
+            }
+
+            .nav-title {
+                font-size: 1.2em;
+            }
+
+            .hero-content {
+                padding: 20px 15px;
+            }
+
+            .nav-link {
+                width: 100%;
+                padding: 12px 20px;
+            }
+        }
+
+        /* Animation Classes */
+        .slide-in {
+            animation: slideInDown 1s ease-out;
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-out;
+        }
+
+        .fade-up {
+            animation: fadeInUp 1s ease-out;
+        }
+
+        /* Loading States */
+        .loading {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--primary-blue);
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Button Hover Effects */
+        .nav-link:focus {
+            outline: 2px solid var(--primary-blue);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation" id="bgAnimation"></div>
+
+    <div class="container">
+        <header>
+            <h1>Task Management System</h1>
+        </header>
+        
+        <nav>
+            <div class="nav-title">Welcome to Task Management System</div>
+        </nav>
+        
+        <!-- Hero Content -->
+        <div class="hero-content">
+            <p class="main-description">Hope You Are Doing Well!</p>
+            <p>This is a simple task management system where you can create, read, update, and delete tasks.</p>
+            <p>To get started, please use the navigation links below:</p>
+        </div>
+
+        <!-- Enhanced Navigation -->
+        <div class="nav-links">
+            <a href="login.html" class="nav-link">
+                <i class="fas fa-sign-in-alt"></i> 
+                <span>Log In</span>
+            </a>
+            <a href="register.html" class="nav-link">
+                <i class="fas fa-user-plus"></i> 
+                <span>Register</span>
+            </a>
+            <a href="dashboard.html" class="nav-link primary-btn">
+                <i class="fas fa-tachometer-alt"></i> 
+                <span>Dashboard</span>
+            </a>
+        </div>
+
+        <!-- Feature Highlights -->
+        <div class="features-section">
+            <div class="feature-item" onclick="animateFeature(this)">
+                <i class="fas fa-tasks"></i>
+                <h3>Organize Tasks</h3>
+                <p>Keep all your tasks organized and prioritized</p>
+            </div>
+            <div class="feature-item" onclick="animateFeature(this)">
+                <i class="fas fa-clock"></i>
+                <h3>Track Time</h3>
+                <p>Monitor your productivity and deadlines</p>
+            </div>
+            <div class="feature-item" onclick="animateFeature(this)">
+                <i class="fas fa-chart-bar"></i>
+                <h3>View Progress</h3>
+                <p>Analyze your performance with visual reports</p>
+            </div>
+        </div>
+
+        <!-- Additional Links -->
+        <div class="additional-links">
+            <p>For more information, visit our <a href="about.html" class="inline-link">About</a> page.</p>
+            <p>For any queries, feel free to <a href="contact.html" class="inline-link">Contact</a> us.</p>
+            <p class="motivation">Stay organized and productive!</p>
+        </div>
+
+        <footer>
+            <p>© 2025 Diya Prajapati</p>
+            <div class="footer-links">
+                <a href="privacy.html">Privacy</a>
+                <a href="terms.html">Terms</a>
+                <a href="help.html">Help</a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Create floating background particles
+        function createParticles() {
+            const bgAnimation = document.getElementById('bgAnimation');
+            const particleCount = 30;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                const size = Math.random() * 4 + 2;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+
+                bgAnimation.appendChild(particle);
+            }
+        }
+
+        // Animate feature cards
+        function animateFeature(feature) {
+            feature.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                feature.style.transform = 'scale(1) translateY(-5px)';
+            }, 150);
+        }
+
+        // Add button click effects
+        function addButtonEffects() {
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1)';
+                    }, 150);
+                });
+            });
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            addButtonEffects();
+            
+            // Add entrance animations
+            setTimeout(() => {
+                document.querySelector('.container').style.opacity = '1';
+                document.querySelector('.container').style.transform = 'translateY(0)';
+            }, 100);
+
+            // Add hover effects
+            document.querySelectorAll('.feature-item, .nav-link').forEach(element => {
+                element.addEventListener('mouseenter', function() {
+                    this.style.filter = 'brightness(1.1)';
+                });
+                
+                element.addEventListener('mouseleave', function() {
+                    this.style.filter = 'brightness(1)';
+                });
+            });
+        });
+
+        // Smooth scroll for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

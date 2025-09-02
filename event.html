@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Events & Students</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(120deg, #e0f7fa, #b2ebf2);
+            padding: 20px;
+        }
+        h2 {
+            background: #0288d1;
+            color: white;
+            padding: 10px;
+            border-radius: 6px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+            letter-spacing: 1px;
+        }
+        .box {
+            background: #ffffff;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+        }
+        .student, .event {
+            background: #e1f5fe;
+            margin: 6px 0;
+            padding: 10px;
+            border-radius: 6px;
+            transition: 0.3s;
+            border-left: 5px solid #0288d1;
+            font-size: 16px;
+        }
+        .student:hover, .event:hover {
+            background: #b3e5fc;
+            transform: scale(1.02);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+
+<h2>PROFILES</h2>
+<div id="studentList" class="box"></div>
+
+<h2>EVENTS</h2>
+<div id="eventList" class="box"></div>
+
+<script>
+    let jsonData = `{
+        "students": [
+            { "name": "Nidhi", "age": 20, "course": "B.Tech" },
+            { "name": "Diya", "age": 19, "course": "B.Tech" },
+            { "name": "Dharti", "age": 21, "course": "B.S.C" }
+        ],
+        "events": [
+            { "title": "AWS Community Day", "date": "2025-08-25" },
+            { "title": "Spoural", "date": "2025-09-10" }
+        ]
+    }`;
+
+    let data = JSON.parse(jsonData);
+
+    data.students.forEach(s => {
+        document.getElementById("studentList").innerHTML +=
+            `<div class="student"><b>${s.name}</b> (Age: ${s.age}) - ${s.course}</div>`;
+    });
+
+    data.events.forEach(e => {
+        document.getElementById("eventList").innerHTML +=
+            `<div class="event"><b>${e.title}</b> - ${e.date}</div>`;
+    });
+</script>
+
+</body>
+</html>

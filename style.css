@@ -1,0 +1,157 @@
+body {
+    background-color: #3473d1;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* container */
+.container {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 40px;
+    background-color: #43348d;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* header */
+header h1 {
+    text-align: center;
+    color: #fff;
+    background: #4689ee;
+    padding: 20px;
+    font-size: 2.5em;
+    border-radius: 10px;
+    margin: 0 0 30px;
+}
+
+.nav-title {
+    text-align: center;
+    font-size: 1.6em;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+/* paragraphs */
+p {
+    text-align: center;
+    color: #fff;
+    font-size: 1.1em;
+    margin: 15px 0;
+    line-height: 1.6;
+}
+
+/* nav links */
+.nav-links {
+    text-align: center;
+    margin: 30px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+.nav-link {
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    background-color: #4caf50;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+    font-size: 1em;
+    min-width: 120px;
+    text-align: center;
+}
+
+.nav-link:hover,
+.nav-link:focus {
+    background-color: #388e3c;
+    outline: none;
+}
+
+/* links */
+a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* footer */
+footer {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 0.9em;
+    color: #fff;
+}
+
+footer a {
+    color: #007BFF;
+}
+
+/* --------------------
+   RESPONSIVENESS 
+-------------------- */
+
+/* tablets */
+@media (max-width: 768px) {
+    .container {
+        margin: 20px;
+        padding: 20px;
+    }
+
+    header h1 {
+        font-size: 2em;
+        padding: 15px;
+    }
+
+    .nav-title {
+        font-size: 1.3em;
+    }
+
+    p {
+        font-size: 1em;
+    }
+
+    .nav-link {
+        padding: 10px 15px;
+        font-size: 0.95em;
+    }
+}
+
+/* mobile */
+@media (max-width: 480px) {
+    .container {
+        margin: 10px;
+        padding: 15px;
+    }
+
+    header h1 {
+        font-size: 1.5em;
+        padding: 10px;
+    }
+
+    .nav-title {
+        font-size: 1.1em;
+    }
+
+    p {
+        font-size: 0.9em;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .nav-link {
+        width: 100%;
+        max-width: 250px;
+    }
+}

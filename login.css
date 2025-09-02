@@ -1,0 +1,91 @@
+/* Basic reset */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #e3f2fd;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #0288d1;
+  color: white;
+  padding: 15px;
+  text-align: center;
+}
+
+footer {
+  text-align: center;
+  margin-top: 20px;
+  padding-bottom: 20px;
+}
+
+/* Container with animation */
+.container {
+  max-width: 400px;
+  margin: 50px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  animation: slideDown 0.5s ease;
+}
+
+/* Slide animation */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.login-icon {
+  width: 80px;
+  display: block;
+  margin: 0 auto 20px;
+}
+
+input {
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}
+
+input:focus {
+  border-color: #0288d1;
+  box-shadow: 0 0 5px rgba(2, 136, 209, 0.5);
+}
+
+.forgot {
+  text-align: right;
+  margin: 5px 0 15px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #0288d1;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0277bd;
+}
+
+/* Responsive Design */
+@media (max-width: 500px) {
+  .container {
+    width: 90%;
+    margin: 30px auto;
+  }
+}
