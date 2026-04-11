@@ -1,0 +1,20 @@
+{
+  "name": "taskmanager-backend",
+  "version": "1.0.0",
+  "description": "Task Management System Backend",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "mongoose": "^9.4.1"
+  }
+}
