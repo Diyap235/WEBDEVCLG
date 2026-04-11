@@ -1,18 +1,74 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Select Theme</title>
-  <link rel="stylesheet" href="themes.css">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Themes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-dark: #0B0914; --panel-bg: #1A1625; --neon-primary: #A855F7; 
+            --neon-blue: #06B6D4; --text-main: #FFFFFF; --text-muted: #9CA3AF;
+            --danger-red: #EF4444; --border-glow: 0 0 15px rgba(168, 85, 247, 0.2);
+        }
+        body { margin: 0; padding: 20px; font-family: 'Poppins', sans-serif; background-color: var(--bg-dark); color: var(--text-main); display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .dashboard-wrapper { display: flex; width: 100%; max-width: 1800px; min-height: 90vh; gap: 40px; }
+        
+        .left-panel { flex: 1; min-width: 280px; max-width: 350px; background-color: var(--panel-bg); border-radius: 20px; padding: 50px 40px; display: flex; flex-direction: column; border: 1px solid rgba(168, 85, 247, 0.3); box-shadow: var(--border-glow); overflow-y: auto; }
+        .left-panel::-webkit-scrollbar { display: none; }
+        .user-info h2 { margin: 0 0 5px 0; font-size: 1.8rem; color: var(--neon-blue); }
+        .user-info p { margin: 0; color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
+        .side-nav { margin-top: 30px; display: flex; flex-direction: column; gap: 8px; flex-grow: 1; }
+        .nav-item { text-decoration: none; color: var(--text-muted); padding: 12px 20px; border-radius: 10px; font-weight: 500; display: flex; align-items: center; gap: 15px; transition: 0.3s; }
+        .nav-item:hover, .nav-item.active { background: rgba(168, 85, 247, 0.1); color: var(--neon-primary); border-left: 4px solid var(--neon-primary); }
+        .nav-section-title { color: rgba(255,255,255,0.3); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; margin-left: 20px; margin-bottom: 5px; margin-top: 10px;}
+        .logout-btn { background: transparent; color: var(--neon-primary); border: 1px solid var(--neon-primary); padding: 12px; border-radius: 10px; font-weight: 600; cursor: pointer; transition: 0.3s; display: flex; justify-content: center; align-items: center; gap: 10px; text-decoration: none; margin-top: 20px;}
+        .logout-btn:hover { background: var(--neon-primary); color: white; box-shadow: 0 0 15px var(--neon-primary); }
+
+        .center-panel { flex: 3; background-color: var(--panel-bg); border-radius: 20px; padding: 50px; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 1px solid rgba(168, 85, 247, 0.3); box-shadow: var(--border-glow); overflow: hidden; text-align: center;}
+        
+        .theme-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 40px; width: 100%; max-width: 700px;}
+        .theme-box { height: 150px; border-radius: 15px; cursor: pointer; transition: 0.3s; display: flex; justify-content: center; align-items: center; font-weight: 600; font-size: 1.2rem; color: white; }
+        .theme-box:hover { transform: scale(1.05); }
+    </style>
 </head>
 <body>
-  <header><h1>Choose Your Theme</h1></header>
-  <main class="container">
-    <label><input type="radio" name="theme" checked> Light Theme</label>
-    <label><input type="radio" name="theme"> Dark Theme</label>
-    <label><input type="radio" name="theme"> Blue Theme</label>
-    <label><input type="radio" name="theme"> Green Theme</label>
-    <label><input type="radio" name="theme"> Red Theme</label>
-  </main>
+    <div class="dashboard-wrapper">
+        <aside class="left-panel">
+            <div class="user-info"><h2>Themes 🎨</h2><p>Personalize your UI.</p></div>
+            <nav class="side-nav">
+                <span class="nav-section-title">Main Menu</span>
+                <a href="dashboard.html" class="nav-item"><i class="fas fa-home"></i> Dashboard</a>
+                <a href="search.html" class="nav-item"><i class="fas fa-search"></i> Search Tasks</a>
+                <a href="performance.html" class="nav-item"><i class="fas fa-chart-line"></i> Performance</a>
+                <a href="themes.html" class="nav-item active"><i class="fas fa-palette"></i> Themes</a>
+                <a href="profile.html" class="nav-item"><i class="fas fa-user"></i> Profile</a>
+            </nav>
+            <a href="logout.html" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </aside>
+
+        <main class="center-panel">
+            <h1 style="margin-top:0; font-size: 2rem;">Select a Neon Color</h1>
+            <div class="theme-grid">
+                <div class="theme-box" style="background: #A855F7; box-shadow: 0 0 20px #A855F7;" onclick="setTheme('#A855F7')">Purple</div>
+                <div class="theme-box" style="background: #06B6D4; box-shadow: 0 0 20px #06B6D4;" onclick="setTheme('#06B6D4')">Cyan</div>
+                <div class="theme-box" style="background: #10B981; box-shadow: 0 0 20px #10B981;" onclick="setTheme('#10B981')">Hacker Green</div>
+                <div class="theme-box" style="background: #F43F5E; box-shadow: 0 0 20px #F43F5E;" onclick="setTheme('#F43F5E')">Crimson</div>
+                <div class="theme-box" style="background: #F59E0B; box-shadow: 0 0 20px #F59E0B;" onclick="setTheme('#F59E0B')">Gold</div>
+                <div class="theme-box" style="background: #3B82F6; box-shadow: 0 0 20px #3B82F6;" onclick="setTheme('#3B82F6')">Royal Blue</div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const savedTheme = localStorage.getItem('appTheme');
+        if (savedTheme) { document.documentElement.style.setProperty('--neon-primary', savedTheme); }
+
+        function setTheme(colorCode) {
+            localStorage.setItem('appTheme', colorCode);
+            document.documentElement.style.setProperty('--neon-primary', colorCode);
+        }
+    </script>
 </body>
 </html>

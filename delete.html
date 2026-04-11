@@ -1,15 +1,88 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Delete Task</title>
-  <link rel="stylesheet" href="delete.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Tasks - Task Management System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .delete-card {
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(15, 23, 42, 0.05);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+        }
+    </style>
 </head>
 <body>
-  <header><h1>Delete Task</h1></header>
-  <main>
-    <p>Are you sure you want to delete the task <strong>"Submit report"</strong>?</p>
-    <button class="confirm">Yes, Delete</button>
-    <button class="cancel">No, Go Back</button>
-  </main>
+
+    <div class="container">
+        <header>
+            <div class="icon-wrapper" style="color: var(--danger-red); background: #FFE6E6;">
+                <i class="fas fa-trash-alt"></i>
+            </div>
+            <h1>Delete Tasks</h1>
+            <p class="subtitle">Select a task to permanently remove it.</p>
+        </header>
+
+        <div id="deleteList" style="margin-top: 20px;">
+            <p style="color: var(--text-muted);">Loading tasks...</p>
+        </div>
+
+        <div class="nav-links" style="margin-top: 30px;">
+            <a href="dashboard.html" class="nav-link btn-secondary"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+        </div>
+    </div>
+
+    <script>
+        const userId = localStorage.getItem('userId');
+        if (!userId) window.location.href = 'login.html';
+
+        async function loadTasksForDeletion() {
+            try {
+                const response = await fetch(`http://localhost:3000/tasks/${userId}`);
+                const tasks = await response.json();
+                const list = document.getElementById('deleteList');
+                
+                if (tasks.length === 0) {
+                    list.innerHTML = '<p style="color: var(--success-green);">Your workspace is clean! No tasks to delete.</p>';
+                    return;
+                }
+
+                list.innerHTML = tasks.map(task => `
+                    <div class="delete-card">
+                        <div>
+                            <h4 style="margin:0; color: var(--navy-dark);">${task.title}</h4>
+                        </div>
+                        <button onclick="confirmDelete('${task._id}')" class="nav-link btn-danger" style="padding: 8px 15px; font-size: 0.85rem;">
+                            Delete
+                        </button>
+                    </div>
+                `).join('');
+            } catch (error) {
+                document.getElementById('deleteList').innerHTML = '<p class="message-box error" style="display:block;">Error loading tasks.</p>';
+            }
+        }
+
+        window.confirmDelete = async (taskId) => {
+            if(confirm("Are you sure? This cannot be undone.")) {
+                try {
+                    await fetch(`http://localhost:3000/tasks/${taskId}`, { method: 'DELETE' });
+                    loadTasksForDeletion(); // Reload the list
+                } catch (error) {
+                    alert("Failed to delete task.");
+                }
+            }
+        }
+
+        loadTasksForDeletion();
+    </script>
 </body>
 </html>

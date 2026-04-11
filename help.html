@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help - Task Management System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .help-step {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-align: left;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.5);
+            border-radius: 12px;
+        }
+        .step-num {
+            background: var(--navy-dark);
+            color: white;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <div class="icon-wrapper">
+                <i class="fas fa-life-ring"></i>
+            </div>
+            <h1>Help Center</h1>
+            <p class="subtitle">Quick start guide to your workspace</p>
+        </header>
+
+        <div style="margin-top: 30px;">
+            <div class="help-step">
+                <div class="step-num">1</div>
+                <div>
+                    <h4 style="margin: 0; color: var(--navy-dark);">Create an Account</h4>
+                    <p style="margin: 0; font-size: 0.9rem;">Navigate to the Register page and securely sign up.</p>
+                </div>
+            </div>
+            <div class="help-step">
+                <div class="step-num">2</div>
+                <div>
+                    <h4 style="margin: 0; color: var(--navy-dark);">Access Dashboard</h4>
+                    <p style="margin: 0; font-size: 0.9rem;">Log in to view your personalized task list.</p>
+                </div>
+            </div>
+            <div class="help-step">
+                <div class="step-num">3</div>
+                <div>
+                    <h4 style="margin: 0; color: var(--navy-dark);">Manage Tasks</h4>
+                    <p style="margin: 0; font-size: 0.9rem;">Use the 'Add' feature to create tasks, and the trash icon to remove them.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-links" style="margin-top: 30px;">
+            <a href="index.html" class="nav-link btn-secondary"><i class="fas fa-home"></i> Home</a>
+            <a href="contact.html" class="nav-link btn-primary">Still need help?</a>
+        </div>
+    </div>
+
+</body>
+</html>

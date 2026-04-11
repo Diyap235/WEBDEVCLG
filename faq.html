@@ -1,116 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>FAQs - Task Management System</title>
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #f5f5f5;
-      margin: 0;
-      padding: 0 20px 40px 20px;
-    }
-    header {
-      background-color: #4caf50;
-      color: white;
-      padding: 20px;
-      text-align: center;
-      font-size: 24px;
-    }
-    main {
-      max-width: 700px;
-      margin: 30px auto;
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 8px rgba(0,0,0,0.1);
-    }
-    .faq-item {
-      border-bottom: 1px solid #ddd;
-      padding: 12px 0;
-    }
-    .faq-question {
-      font-weight: 600;
-      cursor: pointer;
-      position: relative;
-      padding-right: 25px;
-    }
-    .faq-question::after {
-      content: '+';
-      position: absolute;
-      right: 0;
-      top: 0;
-      font-size: 20px;
-      line-height: 1;
-      transition: transform 0.3s ease;
-    }
-    .faq-question.active::after {
-      content: '-';
-      transform: rotate(180deg);
-    }
-    .faq-answer {
-      display: none;
-      margin-top: 8px;
-      color: #444;
-      line-height: 1.5;
-    }
-    .faq-answer.show {
-      display: block;
-    }
-    footer {
-      max-width: 700px;
-      margin: 20px auto;
-      text-align: center;
-      color: #777;
-      font-size: 14px;
-    }
-    a {
-      color: #4caf50;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Task Management System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .faq-item {
+            text-align: left;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(15, 23, 42, 0.1);
+        }
+        .faq-item h4 {
+            color: var(--purple-primary);
+            margin-bottom: 5px;
+        }
+    </style>
 </head>
 <body>
-  <header>Task Management System - FAQs</header>
-  <main>
-    <div class="faq-item">
-      <div class="faq-question">What is the Task Management System?</div>
-      <div class="faq-answer">It is a simple web app to create, track, update, and delete your tasks efficiently.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-question">Do I need to register to use the system?</div>
-      <div class="faq-answer">Yes, you must register and log in to access your personalized dashboard.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-question">Can I edit or delete my tasks?</div>
-      <div class="faq-answer">Absolutely! You can update task details or delete tasks anytime from your dashboard.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-question">Is my task data secure?</div>
-      <div class="faq-answer">Your data is saved securely and only accessible when you log in.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-question">How can I contact support?</div>
-      <div class="faq-answer">You can visit our <a href="contact.html">Contact</a> page to get in touch with our support team.</div>
-    </div>
-  </main>
 
-  <footer>© 2025 Diya Prajapati</footer>
+    <div class="container">
+        <header>
+            <div class="icon-wrapper">
+                <i class="fas fa-question-circle"></i>
+            </div>
+            <h1>FAQ</h1>
+            <p class="subtitle">Frequently Asked Questions</p>
+        </header>
 
-  <script>
-    const questions = document.querySelectorAll('.faq-question');
-    questions.forEach(q => {
-      q.addEventListener('click', () => {
-        q.classList.toggle('active');
-        const answer = q.nextElementSibling;
-        answer.classList.toggle('show');
-      });
-      
-    });
-  </script>
+        <div style="margin-top: 30px;">
+            <div class="faq-item">
+                <h4>Is this application free to use?</h4>
+                <p>Yes, this is an open-source project built for educational purposes.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Are my tasks private?</h4>
+                <p>Absolutely. Tasks are tied directly to your specific User ID in the database and cannot be seen by others.</p>
+            </div>
+            <div class="faq-item">
+                <h4>What technology powers this?</h4>
+                <p>It is a Full-Stack application utilizing a Node.js backend, MongoDB database, and a custom CSS Glassmorphism frontend.</p>
+            </div>
+        </div>
+
+        <div class="nav-links" style="margin-top: 30px;">
+            <a href="index.html" class="nav-link btn-secondary"><i class="fas fa-arrow-left"></i> Home</a>
+        </div>
+    </div>
+
 </body>
 </html>
