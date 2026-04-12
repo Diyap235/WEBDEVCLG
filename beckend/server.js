@@ -4,7 +4,7 @@ const cors = require('cors');
 const path = require('path');
 
 // Load environment variables
-require('dotenv').config();
+require('dotenv').config({ path: path.join(__dirname, '.env') });
 
 const User = require(path.join(__dirname, 'models', 'User'));
 const Task = require(path.join(__dirname, 'models', 'Task'));
@@ -27,6 +27,8 @@ app.post('/register', async (req, res) => {
     try {
         const { username, email, password } = req.body;
         
+        console.log("Registration attempt:", { username, email });
+        
         // Prevent crashing if email already exists
         const existingUser = await User.findOne({ email });
         if (existingUser) {
@@ -35,10 +37,12 @@ app.post('/register', async (req, res) => {
 
         const newUser = new User({ username, email, password });
         await newUser.save();
+        console.log("User registered successfully!");
         res.status(201).json({ message: "Registration successful!" });
     } catch (err) {
-        console.error("DB Error:", err.message);
-        res.status(400).json({ error: "Registration failed" });
+        console.error("REGISTRATION ERROR:", err.message);
+        console.error("Full error:", err);
+        res.status(400).json({ error: err.message || "Registration failed" });
     }
 });
 
