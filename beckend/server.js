@@ -27,8 +27,8 @@ mongoose.connect(process.env.MONGODB_URI)
 // ... (keep all your existing app.post, app.get, app.put, app.delete routes exactly the same)
 app.post('/register', async (req, res) => {
     try {
-        const { username, email, password } = req.body;
-        const newUser = new User({ username, email, password });
+        const { username, password } = req.body;
+        const newUser = new User({ username, password });
         await newUser.save();
         res.status(201).json({ message: "User registered successfully!" });
     } catch (error) {
@@ -38,8 +38,8 @@ app.post('/register', async (req, res) => {
 
 app.post('/login', async (req, res) => {
     try {
-        const { email, password } = req.body;
-        const user = await User.findOne({ email });
+        const { username, password } = req.body;
+        const user = await User.findOne({ username });
         if (!user) {
             return res.status(401).json({ error: "Invalid credentials" });
         }
