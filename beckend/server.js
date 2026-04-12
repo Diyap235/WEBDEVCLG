@@ -3,19 +3,27 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
 
+// NEW: Load environment variables from the .env file
+require('dotenv').config(); 
+
 const User = require(path.join(__dirname, 'models', 'User'));
 const Task = require(path.join(__dirname, 'models', 'Task'));
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect('mongodb://127.0.0.1:27017/taskmanager')
-.then(() => console.log('✅ Connected to MongoDB successfully!'))
+// ==========================================
+// MONGODB SECURE CONNECTION
+// ==========================================
+// Notice how the URL is no longer typed out here!
+mongoose.connect(process.env.MONGODB_URI)
+.then(() => console.log('✅ Connected to MongoDB Atlas Cloud successfully!'))
 .catch(err => console.error('❌ MongoDB connection error:', err));
 
+// ... (keep all your existing app.post, app.get, app.put, app.delete routes exactly the same)
 app.post('/register', async (req, res) => {
     try {
         const { username, email, password } = req.body;
