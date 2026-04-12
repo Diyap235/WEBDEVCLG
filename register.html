@@ -53,65 +53,65 @@
         </div>
     </div>
 
-   <script>
-    document.getElementById('registerForm').addEventListener('submit', async function(e) {
-        e.preventDefault(); // Fixed typo here
-        
-        const username = document.getElementById('username').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const password = document.getElementById('password').value;
-        const confirmPassword = document.getElementById('confirmPassword').value;
-        const submitBtn = document.getElementById('submitBtn');
-        const messageBox = document.getElementById('message-box');
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', async function(e) {
+            e.preventDefault(); 
+            
+            const username = document.getElementById('username').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const submitBtn = document.getElementById('submitBtn');
+            const messageBox = document.getElementById('message-box');
 
-        if (password.length < 6) {
-            showMessage('Password must be at least 6 characters.', 'error');
-            return;
-        }
-        if (password !== confirmPassword) {
-            showMessage('Passwords do not match.', 'error');
-            return;
-        }
+            if (password.length < 6) {
+                showMessage('Password must be at least 6 characters.', 'error');
+                return;
+            }
+            if (password !== confirmPassword) {
+                showMessage('Passwords do not match.', 'error');
+                return;
+            }
 
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Registering...';
-        submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Registering...';
+            submitBtn.disabled = true;
 
-        try {
-            // Determine API URL (Local vs Vercel)
-            const apiUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
-                ? 'http://localhost:3000/register' 
-                : '/api/register';
+            try {
+                // SMART URL: Switches automatically based on where it's running
+                const apiUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
+                    ? 'http://localhost:3000/register' 
+                    : '/api/register';
 
-            const response = await fetch(apiUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username, email, password })
-            });
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, email, password })
+                });
 
-            const data = await response.json();
+                const data = await response.json();
 
-            if (response.ok) {
-                showMessage('Account created successfully! Redirecting...', 'success');
-                setTimeout(() => window.location.href = 'login.html', 2000);
-            } else {
-                showMessage(data.error || 'Registration failed.', 'error');
+                if (response.ok) {
+                    showMessage('Account created successfully! Redirecting...', 'success');
+                    setTimeout(() => window.location.href = 'login.html', 2000);
+                } else {
+                    showMessage(data.error || 'Registration failed.', 'error');
+                    resetButton();
+                }
+            } catch (error) {
+                showMessage('Server error. Is your Node backend running?', 'error');
                 resetButton();
             }
-        } catch (error) {
-            showMessage('Server error. Is your Node backend running?', 'error');
-            resetButton();
-        }
 
-        function showMessage(msg, type) {
-            messageBox.style.display = 'block';
-            messageBox.className = `message-box ${type}`;
-            messageBox.innerText = msg;
-        }
-        function resetButton() {
-            submitBtn.innerHTML = 'Create Account';
-            submitBtn.disabled = false;
-        }
-    });
-</script>
+            function showMessage(msg, type) {
+                messageBox.style.display = 'block';
+                messageBox.className = `message-box ${type}`;
+                messageBox.innerText = msg;
+            }
+            function resetButton() {
+                submitBtn.innerHTML = 'Create Account';
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
 </body>
 </html>
