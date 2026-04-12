@@ -20,7 +20,15 @@
   ],
   "rewrites": [
     {
-      "source": "/api/(.*)",
+      "source": "/register",
+      "destination": "/beckend/server.js"
+    },
+    {
+      "source": "/login",
+      "destination": "/beckend/server.js"
+    },
+    {
+      "source": "/tasks(.*)",
       "destination": "/beckend/server.js"
     }
   ]

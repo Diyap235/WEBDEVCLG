@@ -78,10 +78,9 @@
 
             try {
                 // SMART URL: Switches automatically based on where it's running
-                const apiUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
-                    ? 'http://localhost:3000/register' 
-                    : '/api/register';
-
+               const apiUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
+    ? 'http://localhost:3000/register' 
+    : '/register';
                 const response = await fetch(apiUrl, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
