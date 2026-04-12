@@ -1,6 +1,7 @@
 ﻿const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const bcrypt = require('bcryptjs');
 const path = require('path');
 
 // NEW: Load environment variables from the .env file
@@ -38,8 +39,12 @@ app.post('/register', async (req, res) => {
 app.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
-        const user = await User.findOne({ email, password });
-        if (user) {
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(401).json({ error: "Invalid credentials" });
+        }
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if (isPasswordValid) {
             res.status(200).json({ message: "Login successful!", userId: user._id, username: user.username });
         } else {
             res.status(401).json({ error: "Invalid credentials" });
@@ -98,3 +103,4 @@ app.delete('/tasks/:id', async (req, res) => {
 app.listen(PORT, () => {
     console.log(`🚀 Server running on http://localhost:${PORT}`);
 });
+module.exports = app;
