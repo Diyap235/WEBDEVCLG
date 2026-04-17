@@ -76,9 +76,6 @@ body {
     animation: floatIcon 3s ease-in-out infinite;
 }
 
-/* ============================================
-   TEXT - Titles & Paragraphs
-   ============================================ */
 h1 {
     font-size: 2.2rem;
     font-weight: 800;
