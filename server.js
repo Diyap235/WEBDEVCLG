@@ -18,14 +18,9 @@ mongoose.connect('mongodb://127.0.0.1:27017/taskmanager', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
-.then(() => console.log('✅ Connected to MongoDB successfully!'))
-.catch(err => console.error('❌ MongoDB connection error:', err));
+.then(() => console.log(' Connected to MongoDB successfully!'))
+.catch(err => console.error(' MongoDB connection error:', err));
 
-// ==========================================
-// AUTHENTICATION APIs
-// ==========================================
-
-// Register User
 app.post('/register', async (req, res) => {
     try {
         const { username, email, password } = req.body;
@@ -54,11 +49,6 @@ app.post('/login', async (req, res) => {
     }
 });
 
-// ==========================================
-// TASK APIs
-// ==========================================
-
-// Create a Task
 app.post('/tasks', async (req, res) => {
     try {
         const { title, description, userId } = req.body;
@@ -93,5 +83,5 @@ app.delete('/tasks/:id', async (req, res) => {
 
 // Start the Server
 app.listen(PORT, () => {
-    console.log(`🚀 Server running on http://localhost:${PORT}`);
+    console.log(` Server running on http://localhost:${PORT}`);
 });
