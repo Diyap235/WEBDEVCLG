@@ -1,6 +1,4 @@
-/* ============================================
-   DARK THEME COLORS - Change colors here
-   ============================================ */
+
 :root {
     /* Backgrounds */
     --dark-bg: #0D0D0D;
@@ -20,9 +18,6 @@
     --success-green: #00FF88;
 }
 
-/* ============================================
-   SETUP - Remove margins & set up page
-   ============================================ */
 * {
     margin: 0;
     padding: 0;
@@ -40,9 +35,6 @@ body {
     padding: 20px;
 }
 
-/* ============================================
-   MAIN BOX
-   ============================================ */
 .container {
     background: rgba(26, 26, 26, 0.95);
     max-width: 720px;
@@ -65,9 +57,6 @@ body {
     max-width: 450px;
 }
 
-/* ============================================
-   ICON - Circle with tasks icon
-   ============================================ */
 .icon-wrapper {
     width: 100px;
     height: 100px;
@@ -126,9 +115,6 @@ p {
     line-height: 1.8;
 }
 
-/* ============================================
-   BUTTONS
-   ============================================ */
 .nav-links {
     display: flex;
     flex-direction: column;
@@ -233,9 +219,6 @@ p {
     padding: 14px;
 }
 
-/* ============================================
-   LINKS - In text/footer
-   ============================================ */
 .text-link {
     color: var(--neon-cyan);
     text-decoration: none;
@@ -264,10 +247,6 @@ p {
 .text-link:hover::after {
     width: 100%;
 }
-
-/* ============================================
-   FORM INPUTS
-   ============================================ */
 .form-group {
     position: relative;
     margin-bottom: 22px;
@@ -319,9 +298,6 @@ p {
     opacity: 1;
 }
 
-/* ============================================
-   MESSAGES - Success & Error
-   ============================================ */
 .message-box {
     padding: 16px 18px;
     border-radius: 12px;
@@ -351,9 +327,6 @@ p {
     box-shadow: 0 0 25px rgba(255, 68, 102, 0.2);
 }
 
-/* ============================================
-   FOOTER
-   ============================================ */
 .footer-links {
     margin-top: 35px;
     padding-top: 25px;
@@ -377,9 +350,6 @@ footer {
     letter-spacing: 0.3px;
 }
 
-/* ============================================
-   ANIMATIONS - Make things move
-   ============================================ */
 
 /* Main box slides up and fades in */
 @keyframes slideUpFade {
@@ -425,9 +395,6 @@ footer {
     }
 }
 
-/* ============================================
-   MOBILE RESPONSIVE
-   ============================================ */
 @media (max-width: 768px) {
     .container {
         padding: 30px 20px;
