@@ -19,8 +19,8 @@ app.use(express.urlencoded({ extended: true }));
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGODB_URI)
-    .then(() => console.log('✅ Connected to MongoDB!'))
-    .catch(err => console.error('❌ MongoDB error:', err));
+    .then(() => console.log(' Connected to MongoDB!'))
+    .catch(err => console.error(' MongoDB error:', err));
 
 // ===== REGISTER ROUTE =====
 app.post('/register', async (req, res) => {
@@ -108,11 +108,7 @@ app.delete('/tasks/:id', async (req, res) => {
     }
 });
 
-// ===== START SERVER / VERCEL EXPORT =====
-// This tells Vercel to use this file as a Serverless Function
 module.exports = app;
-
-// This keeps it working on your laptop without breaking Vercel
 if (process.env.NODE_ENV !== 'production') {
     app.listen(PORT, () => {
         console.log(`🚀 Server running on http://localhost:${PORT}`);
